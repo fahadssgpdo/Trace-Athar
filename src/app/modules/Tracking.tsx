@@ -149,7 +149,6 @@ export function Tracking() {
         <Panel title={x.map} aside={<span className="muted" style={{ fontSize: 13 }} dir="ltr">{x.chart} · {fmtTime(state.clock)}</span>} style={{ flex: '1 1 440px', maxWidth: 560 }}>
           <svg
             viewBox={`0 0 ${MAP_W} ${MAP_H}`}
-            dir="ltr"
             role="img"
             aria-label={x.mapAlt(state.boats.length, outside.length)}
             style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 14, background: '#DAE7F2', direction: 'ltr', fontFamily: ar ? 'var(--font-arabic)' : 'var(--font-text)' }}
