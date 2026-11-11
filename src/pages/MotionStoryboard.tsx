@@ -75,7 +75,7 @@ const RULES = [
   ['Numbers count, then settle', 'Figures roll up in Sora and stop dead; units and sources fade in after. Every figure on screen comes from the proposal.', '800 ms count · 200 ms stagger'],
   ['Real screens, real taps', 'Product shots are recordings of this prototype in Play mode, framed in plain device outlines. Taps show as an amber ripple.', 'Record at 2× · 24 px slide-in · 300 ms fade'],
   ['Arabic and English as equals', 'Arabic wipes right-to-left, English left-to-right, always the same size. Bilingual captions burned in.', 'Readex Pro 600 · Sora 700'],
-  ['Quiet, Omani, true', 'Real Omani harbours in early light; no stock tropical footage, no gradients, glows, 3D fish or blockchain cubes.', 'Per the Trace brand book'],
+  ['Quiet, Omani, true', 'Real Omani harbours in early light; no stock tropical footage, no gradients, glows, 3D fish or blockchain cubes.', 'Per the Trace/أثر brand book'],
 ]
 
 const FORMATS = [
