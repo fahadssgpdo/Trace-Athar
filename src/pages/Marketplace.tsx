@@ -34,7 +34,7 @@ export default function Marketplace() {
       <PageHeader
         eyebrow="P3 · M6 MARKETPLACE · M7 PAYMENTS"
         title="First-sale marketplace"
-        lead="Remote bidding on STH-verified lots. Buyers pay every fee; fishers are paid the same day."
+        lead="Remote bidding on Trace-verified lots. Buyers pay every fee; fishers are paid the same day."
         action={<span className="pill pill--card" style={{ fontSize: 13, padding: '6px 12px' }}>Demo data · Al Wusta and South Al Sharqiyah</span>}
       />
 
@@ -91,7 +91,7 @@ export default function Marketplace() {
               ['Landed', `${sel.site} · ${sel.time}`],
               ['Gear', sel.gear],
               ['Licence', 'Checked'],
-              ['Status', 'STH Verified'],
+              ['Status', 'Trace Verified'],
             ].map(([k, v]) => (
               <div key={k} style={{ background: c.sand, borderRadius: 10, padding: '8px 10px' }}>
                 <div className="muted">{k}</div>

@@ -26,7 +26,7 @@ export default function PlatformShell({ workspace, workspaceNote, gap, children 
   return (
     <div className="shell">
       <aside className="shell__aside">
-        <img src={logoOnDark} alt="STH" style={{ height: 34, width: 'auto', alignSelf: 'flex-start' }} />
+        <img src={logoOnDark} alt="Trace" style={{ height: 34, width: 'auto', alignSelf: 'flex-start' }} />
         <div style={{ fontSize: 13, color: c.mist }}>
           Workspace
           <div style={{ color: c.sand, fontWeight: 600, fontSize: 15 }}>{workspace}</div>

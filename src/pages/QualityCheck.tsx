@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import seal from '../assets/seal-traced.svg'
+import { TracedSeal } from '../components/Brand'
 import PhoneFrame from '../components/PhoneFrame'
 import { Check, ChevronLeft } from '../components/ui'
 import { c, display } from '../tokens'
@@ -43,7 +43,7 @@ export default function QualityCheck() {
             <ChevronLeft />
           </Link>
           <div style={{ flex: 1 }}>
-            <div className="eyebrow eyebrow--sm eyebrow--amber">STH QUALITY OFFICER</div>
+            <div className="eyebrow eyebrow--sm eyebrow--amber">TRACE QUALITY OFFICER</div>
             <div style={{ ...display, fontWeight: 600, fontSize: 17 }}>OM-DQM-26-11-0051</div>
           </div>
         </div>
@@ -103,15 +103,15 @@ export default function QualityCheck() {
           </>
         ) : (
           <div role="status" className="stack" style={{ gap: 14, alignItems: 'center', textAlign: 'center', paddingTop: 10 }}>
-            <img src={seal} alt="STH Traced seal" style={{ width: 168, height: 168 }} />
-            <div style={{ ...display, fontWeight: 700, fontSize: 24 }}>Lot STH Verified</div>
+            <TracedSeal size={168} />
+            <div style={{ ...display, fontWeight: 700, fontSize: 24 }}>Lot Trace Verified</div>
             <div style={{ fontSize: 15, color: c.body }}>Grade {GRADES[grade][0]} · 5 of 5 checks · 3 photos · officer ID Q-014</div>
             <div className="card stack" style={{ padding: '14px 16px', width: '100%', textAlign: 'left', gap: 8, fontSize: 14 }}>
               <div className="kv"><span className="muted">Verified mark</span><span style={{ fontWeight: 600 }}>20 baisa / kg licence</span></div>
               <div className="kv"><span className="muted">Next step</span><span style={{ fontWeight: 600 }}>Listed on marketplace</span></div>
               <div className="kv"><span className="muted">Event</span><span style={{ fontWeight: 600 }}>EPCIS inspection · logged</span></div>
             </div>
-            <div className="muted" style={{ fontSize: 13 }}>Private assurance by STH. It speeds up official certification but does not replace MAFWR inspection.</div>
+            <div className="muted" style={{ fontSize: 13 }}>Private assurance by Trace. It speeds up official certification but does not replace MAFWR inspection.</div>
             <Link to={paths.marketplace} className="text-link">See it on the marketplace →</Link>
           </div>
         )}
@@ -119,7 +119,7 @@ export default function QualityCheck() {
 
       <div className="phone__footer" style={{ padding: '14px 20px 22px' }}>
         <button type="button" onClick={action} className={`btn btn--block ${!verified && ready ? 'btn--amber' : 'btn--ocean'}`} style={{ minHeight: 54, fontSize: 16 }}>
-          {verified ? 'Next lot' : ready ? 'Mark STH Verified' : 'Complete remaining checks'}
+          {verified ? 'Next lot' : ready ? 'Mark Trace Verified' : 'Complete remaining checks'}
         </button>
       </div>
     </PhoneFrame>

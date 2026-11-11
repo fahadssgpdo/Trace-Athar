@@ -19,7 +19,7 @@ const STREAMS: [string, number][] = [
   ['Export trade desk · 2.5%', 400],
   ['Plant and exporter SaaS', 390],
   ['Buyer audit and supplier scoring', 320],
-  ['STH Verified mark · 20 bz/kg', 300],
+  ['Trace Verified mark · 20 bz/kg', 300],
   ['Payment-processing share · 0.25%', 200],
   ['Data products', 160],
   ['Export compliance documents', 144],
@@ -89,7 +89,7 @@ export default function InvestorCase() {
       <section className="slab">
         <div className="container stack" style={{ paddingTop: 24, paddingBottom: 64, gap: 40 }}>
           <nav aria-label="Investor case" className="row nav-light" style={{ gap: '12px 24px', alignItems: 'center' }}>
-            <img src={logoOnDark} alt="STH" style={{ height: 36, width: 'auto', marginRight: 'auto' }} />
+            <img src={logoOnDark} alt="Trace" style={{ height: 36, width: 'auto', marginRight: 'auto' }} />
             <Link to={paths.overview}>← Overview</Link>
             <Link to={paths.storyboard}>Motion storyboard</Link>
           </nav>
@@ -268,7 +268,7 @@ export default function InvestorCase() {
               <span>{g}</span>
             </div>
           ))}
-          <div className="muted" style={{ fontSize: 13 }}>Founders take no salary during ideation. The MAFWR letter depends on the ministry's timetable; the other four goals are in STH's control.</div>
+          <div className="muted" style={{ fontSize: 13 }}>Founders take no salary during ideation. The MAFWR letter depends on the ministry's timetable; the other four goals are in Trace's control.</div>
         </div>
         <div className="panel stack" style={{ flex: '1 1 380px', minWidth: 0, padding: 24, gap: 14 }}>
           <h2 style={{ ...display, fontWeight: 600, fontSize: 22, color: c.ocean }}>Earning from month 1</h2>
@@ -315,7 +315,7 @@ export default function InvestorCase() {
             )
           })}
         </div>
-        <div className="muted" style={{ fontSize: 13 }}>Figures from the STH proposal (October 2026), optimistic case. Illustrative planning assumptions, to be validated in the pilot and the detailed financial model. Seed pricing is set on what the six months prove.</div>
+        <div className="muted" style={{ fontSize: 13 }}>Figures from the Trace proposal (October 2026), optimistic case. Illustrative planning assumptions, to be validated in the pilot and the detailed financial model. Seed pricing is set on what the six months prove.</div>
       </section>
     </div>
   )

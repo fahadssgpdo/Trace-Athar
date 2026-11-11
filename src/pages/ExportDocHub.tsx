@@ -4,7 +4,7 @@ import { Stat } from '../components/ui'
 import { c, display } from '../tokens'
 
 const MARKETS = [
-  { code: 'EU', rule: 'CATCH catch certificate', docs: [['EU catch certificate (CATCH)', 'Validated by MAFWR as flag state'], ['Health certificate data', 'Approved establishment'], ['Lot passport and cold-chain proof', 'STH record, QR']] },
+  { code: 'EU', rule: 'CATCH catch certificate', docs: [['EU catch certificate (CATCH)', 'Validated by MAFWR as flag state'], ['Health certificate data', 'Approved establishment'], ['Lot passport and cold-chain proof', 'Trace record, QR']] },
   { code: 'US', rule: 'MMPA · SIMP', docs: [['MMPA certificate of admissibility', 'Signed by an authorised MAFWR official'], ['SIMP key data elements', 'Harvest and landing data'], ['Gear, area and bycatch evidence', 'Per lot'], ['Health certificate data', 'Approved establishment']] },
   { code: 'Japan', rule: 'Catch certificate · IOTC', docs: [['IOTC statistical document', 'Tuna'], ['Data pack for the government certificate', 'Designated species'], ['Health certificate data', 'Approved establishment']] },
   { code: 'GCC', rule: 'Health certificate', docs: [['Health certificate data', 'Approved establishment'], ['Lot passport and cold-chain proof', 'Audited sourcing for hotels']] },
@@ -12,8 +12,8 @@ const MARKETS = [
 
 const ONLINE = (eu: boolean) => [
   ['Request', 'Exporter selects lots and market'],
-  ['Preparation', 'STH builds the pack from verified lots'],
-  ['Electronic submission', 'STH → MAFWR via API or e-services'],
+  ['Preparation', 'Trace builds the pack from verified lots'],
+  ['Electronic submission', 'Trace → MAFWR via API or e-services'],
   ['Official decision', 'MAFWR reviews, validates and signs'],
   ['Return and delivery', `Signed documents to exporter${eu ? ' and EU CATCH' : ''}`],
   ['Customs declaration', 'Shipment data → Bayan, with MAFWR document numbers'],
@@ -21,11 +21,11 @@ const ONLINE = (eu: boolean) => [
 ]
 const OFFLINE = [
   ['Request', 'Exporter selects lots and market'],
-  ['Preparation', 'STH builds the pack from verified lots'],
-  ['Manual filing', 'Exporter files the STH pack with MAFWR'],
+  ['Preparation', 'Trace builds the pack from verified lots'],
+  ['Manual filing', 'Exporter files the Trace pack with MAFWR'],
   ['Official decision', 'MAFWR reviews, validates and signs'],
   ['Signed copy uploaded', 'Exporter adds the signed documents to the record'],
-  ['Declaration keyed', 'Clearing agent keys from the STH PDF and QR'],
+  ['Declaration keyed', 'Clearing agent keys from the Trace PDF and QR'],
   ['Clearance and release', 'Customs clears at the port or airport'],
 ]
 const TIMES = ['08:02', '08:40', '08:41', '11:15', '11:16', '11:30', '14:05']
@@ -104,7 +104,7 @@ export default function ExportDocHub() {
             </div>
           </div>
           <div className="kv" style={{ fontSize: 14, borderTop: `1px solid ${c.line}`, paddingTop: 10 }}>
-            <span className="muted">STH fee · RO {rate} {online ? 'online' : 'offline'} per document</span>
+            <span className="muted">Trace fee · RO {rate} {online ? 'online' : 'offline'} per document</span>
             <span style={{ fontWeight: 700 }}>RO {rate * m.docs.length}</span>
           </div>
           <div className="muted" style={{ fontSize: 12 }}>MAFWR statutory fees and Customs duties are unchanged and pass through in full.</div>
@@ -153,12 +153,12 @@ export default function ExportDocHub() {
               <span style={{ color: c.onOcean, fontSize: 14 }}>Declared export weight 300 kg reconciles with landed lots — no unrecorded fish mixed in.</span>
             </div>
           )}
-          <div className="muted" style={{ fontSize: 13 }}>STH never validates, signs or clears. It prepares, transmits and delivers; every official decision stays with MAFWR and Customs.</div>
+          <div className="muted" style={{ fontSize: 13 }}>Trace never validates, signs or clears. It prepares, transmits and delivers; every official decision stays with MAFWR and Customs.</div>
         </section>
       </div>
 
       <div className="grid-auto" style={{ ['--min' as string]: '200px', gap: 12 }}>
-        <Stat label="Pack turnaround, STH side" value="< 24 h → < 2 h" note="Year 2 → Year 5 target" />
+        <Stat label="Pack turnaround, Trace side" value="< 24 h → < 2 h" note="Year 2 → Year 5 target" />
         <Stat label="Submission to signature, MAFWR" value="< 1 day → < 4 h" note="target to agree with MAFWR" />
         <Stat label="Shipments sent to Bayan" value="25% → 90%" note="Year 2 → Year 5 target" />
       </div>

@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import mark from '../assets/mark.svg'
-import seal from '../assets/seal-traced.svg'
+import { TracedSeal } from '../components/Brand'
 import PhoneFrame from '../components/PhoneFrame'
 import { c, display } from '../tokens'
 
 const STAGES = [
   { when: '8 NOV · 06:10', title: 'Caught at sea', text: 'Handline, Arabian Sea coastal waters, boat Al Najm. The licence was checked at landing.' },
-  { when: '8 NOV · 09:30', title: 'Landed and verified', text: 'Weighed at the Duqm collection centre; graded A by an STH quality officer with photo evidence.' },
+  { when: '8 NOV · 09:30', title: 'Landed and verified', text: 'Weighed at the Duqm collection centre; graded A by an Trace quality officer with photo evidence.' },
   { when: '8 NOV · 14:05', title: 'Processed', text: 'Loined at a certified plant in Duqm. Digital HACCP records linked to this lot.' },
   { when: '9 NOV · 22:40', title: 'Exported', text: 'Catch certificate signed by MAFWR; cleared through Bayan at Muscat International Airport.' },
   { when: '10 NOV', title: 'On your plate', text: 'Received by the restaurant within 4 °C. The trace ends here — with you.' },
@@ -20,7 +20,7 @@ export default function ConsumerPassport() {
   return (
     <PhoneFrame>
       <div className="slab" style={{ padding: '22px 20px 20px', display: 'flex', gap: 14, alignItems: 'center' }}>
-        <img src={seal} alt="STH Traced seal" style={{ width: 84, height: 84, flex: 'none', objectFit: 'contain' }} />
+        <TracedSeal size={84} />
         <div className="stack" style={{ gap: 4, minWidth: 0 }}>
           <div lang="ar" dir="rtl" className="arabic" style={{ fontWeight: 600, fontSize: 20, textAlign: 'left' }}>اعرف مصدر سمكك</div>
           <div style={{ fontSize: 15, color: c.onOcean }}>Know where your fish comes from</div>
@@ -88,7 +88,7 @@ export default function ConsumerPassport() {
       </div>
 
       <div className="phone__footer muted" style={{ padding: '12px 20px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, fontSize: 12 }}>
-        <img src={mark} alt="STH" style={{ height: 24, width: 'auto' }} />
+        <img src={mark} alt="Trace" style={{ height: 24, width: 'auto' }} />
         <span>Every catch, traced. · Demo passport</span>
       </div>
     </PhoneFrame>

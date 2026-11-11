@@ -1,32 +1,32 @@
 import { useState, type CSSProperties, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import logoFull from '../assets/logo-full.svg'
 import mark from '../assets/mark.svg'
+import { BrandLogo } from '../components/Brand'
 import { c, display } from '../tokens'
 import { paths } from '../routes'
 
 const STEPS = [
-  { id: 'P1', name: 'Landing & first receipt', actors: 'Fisher, first receiver (collection centre, plant or buyer), STH field coordinator', change: 'A lot is created with a QR label at first receipt: species, weight, boat, site, photo, gear and GPS from the fisher app. The fisher’s licence is uploaded and checked.', modules: ['M1 Lot registration', 'M3 e-Logbook', 'M4 Fisher app', 'M5 Position & gear'], data: 'Source lot', to: paths.lotRegistration, cta: 'Register a lot' },
-  { id: 'P2', name: 'Quality check & grading', actors: 'STH quality officers, plant QA', change: 'Risk-based sampling, photos and grading. The lot is marked STH Verified — private assurance, not an official inspection.', modules: ['M2 Quality check', 'M8 STH Verified mark'], data: 'Verified lot', to: paths.qualityCheck, cta: 'Grade a lot' },
-  { id: 'P3', name: 'First sale & payment', actors: 'Buyers, partner bank', change: 'Remote bidding or fixed price on the STH marketplace, or an off-platform sale recorded against the lot. Same-day payment by the partner bank; the buyer pays all fees.', modules: ['M6 Marketplace', 'M7 Fisher payments'], data: 'Transaction, price, grade', to: paths.marketplace, cta: 'Open the marketplace' },
+  { id: 'P1', name: 'Landing & first receipt', actors: 'Fisher, first receiver (collection centre, plant or buyer), Trace field coordinator', change: 'A lot is created with a QR label at first receipt: species, weight, boat, site, photo, gear and GPS from the fisher app. The fisher’s licence is uploaded and checked.', modules: ['M1 Lot registration', 'M3 e-Logbook', 'M4 Fisher app', 'M5 Position & gear'], data: 'Source lot', to: paths.lotRegistration, cta: 'Register a lot' },
+  { id: 'P2', name: 'Quality check & grading', actors: 'Trace quality officers, plant QA', change: 'Risk-based sampling, photos and grading. The lot is marked Trace Verified — private assurance, not an official inspection.', modules: ['M2 Quality check', 'M8 Trace Verified mark'], data: 'Verified lot', to: paths.qualityCheck, cta: 'Grade a lot' },
+  { id: 'P3', name: 'First sale & payment', actors: 'Buyers, partner bank', change: 'Remote bidding or fixed price on the Trace marketplace, or an off-platform sale recorded against the lot. Same-day payment by the partner bank; the buyer pays all fees.', modules: ['M6 Marketplace', 'M7 Fisher payments'], data: 'Transaction, price, grade', to: paths.marketplace, cta: 'Open the marketplace' },
   { id: 'P4', name: 'Processing & cold chain', actors: 'Plant, transporter', change: 'Receipts, cuts, splits and merges stay linked to source lots, so many small artisanal lots remain traceable inside one shipment. Temperature sensors and digital HACCP.', modules: ['M10 Plant traceability', 'M11 Cold-chain IoT', 'M12 e-HACCP'], data: 'Processed lots, cold-chain records', to: paths.plant, cta: 'Open the plant view' },
-  { id: 'P5', name: 'Export documents', actors: 'Exporter, STH, MAFWR, Customs', change: 'STH builds the document pack from verified lots and submits it to MAFWR, which validates and signs. STH returns the signed documents and sends shipment data to Bayan; Customs clears and Bayan returns the release.', modules: ['M13 Document hub', 'M9 Trade desk'], data: 'Signed documents, declaration, release', to: paths.exportDocs, cta: 'Run a shipment' },
+  { id: 'P5', name: 'Export documents', actors: 'Exporter, Trace, MAFWR, Customs', change: 'Trace builds the document pack from verified lots and submits it to MAFWR, which validates and signs. Trace returns the signed documents and sends shipment data to Bayan; Customs clears and Bayan returns the release.', modules: ['M13 Document hub', 'M9 Trade desk'], data: 'Signed documents, declaration, release', to: paths.exportDocs, cta: 'Run a shipment' },
   { id: 'P6', name: 'Buyer & consumer', actors: 'Hotels, importers, consumers', change: 'Supplier audit and risk score for buyers; a QR passport for consumers showing origin, catch date, cold chain and the quality mark.', modules: ['M14 Buyer audit', 'M15 Product passport'], data: 'Proof of compliance', to: paths.buyerAudit, cta: 'Open the buyer audit' },
 ]
 
-type FlowOwner = 'sth' | 'gov' | 'exporter'
+type FlowOwner = 'trace' | 'gov' | 'exporter'
 const FLOW_STYLE: Record<FlowOwner, { bg: string; fg: string; border: string; num: string }> = {
-  sth: { bg: c.ocean, fg: c.sand, border: c.ocean, num: c.amber },
+  trace: { bg: c.ocean, fg: c.sand, border: c.ocean, num: c.amber },
   gov: { bg: c.sand, fg: c.ocean, border: c.muted, num: c.accent },
   exporter: { bg: c.amber, fg: c.ocean, border: c.amber, num: c.ocean },
 }
 const FLOW: { title: string; who: string; owner: FlowOwner }[] = [
   { title: 'Request', who: 'Exporter picks lots and market', owner: 'exporter' },
-  { title: 'Preparation', who: 'STH builds the pack', owner: 'sth' },
-  { title: 'Submission', who: 'STH → MAFWR, electronically', owner: 'sth' },
+  { title: 'Preparation', who: 'Trace builds the pack', owner: 'trace' },
+  { title: 'Submission', who: 'Trace → MAFWR, electronically', owner: 'trace' },
   { title: 'Decision', who: 'MAFWR validates and signs', owner: 'gov' },
-  { title: 'Delivery', who: 'Signed documents to exporter', owner: 'sth' },
-  { title: 'Declaration', who: 'Shipment data → Bayan', owner: 'sth' },
+  { title: 'Delivery', who: 'Signed documents to exporter', owner: 'trace' },
+  { title: 'Declaration', who: 'Shipment data → Bayan', owner: 'trace' },
   { title: 'Release', who: 'Customs clears at port', owner: 'gov' },
 ]
 
@@ -42,7 +42,7 @@ const BREAKS = [
 const SCREENS = [
   { n: '01', kind: 'Mobile · AR', title: 'Fisher app', desc: 'Prices, payments, weather and SOS in Arabic, with voice.', to: paths.fisher },
   { n: '02', kind: 'Mobile', title: 'Lot registration', desc: 'Create a QR lot at first receipt with a licence check.', to: paths.lotRegistration },
-  { n: '03', kind: 'Mobile', title: 'Quality check', desc: 'Grade with photo evidence and apply STH Verified.', to: paths.qualityCheck },
+  { n: '03', kind: 'Mobile', title: 'Quality check', desc: 'Grade with photo evidence and apply Trace Verified.', to: paths.qualityCheck },
   { n: '04', kind: 'Web', title: 'First-sale marketplace', desc: 'Remote bidding on verified lots, same-day settlement.', to: paths.marketplace },
   { n: '05', kind: 'Web', title: 'Plant & cold chain', desc: 'Splits and merges linked to source lots; live temperatures.', to: paths.plant },
   { n: '06', kind: 'Web', title: 'Export document hub', desc: 'Pack → MAFWR signature → Bayan release.', to: paths.exportDocs },
@@ -60,9 +60,9 @@ const WHY_STATS = [
 ]
 
 const COMPETITION = [
-  ['Behar · competitor', 'Online auction at Al Fulaij since 2020. STH starts where Behar is weakest — landing sites in Al Wusta and South Al Sharqiyah — and sells the sale as part of an export-ready lot, with buyer-paid fees set below Behar’s.'],
-  ['Tharawat · ministry gateway', 'Licences and permits, with no lot-level records in public material. STH complements it: licence data verifies exporters, packs go to MAFWR through the agreed exchange.'],
-  ['International vendors · paper', 'Generic plant software lacks landing-level data; paper lacks speed. STH brings lower cost, local support and a free first year of Basic SaaS for small plants.'],
+  ['Behar · competitor', 'Online auction at Al Fulaij since 2020. Trace starts where Behar is weakest — landing sites in Al Wusta and South Al Sharqiyah — and sells the sale as part of an export-ready lot, with buyer-paid fees set below Behar’s.'],
+  ['Tharawat · ministry gateway', 'Licences and permits, with no lot-level records in public material. Trace complements it: licence data verifies exporters, packs go to MAFWR through the agreed exchange.'],
+  ['International vendors · paper', 'Generic plant software lacks landing-level data; paper lacks speed. Trace brings lower cost, local support and a free first year of Basic SaaS for small plants.'],
 ]
 
 const MODEL_STATS = [
@@ -91,7 +91,7 @@ export default function Overview() {
     <div style={{ fontSize: 17, lineHeight: 1.55 }}>
       <header style={{ borderBottom: `1px solid ${c.line}` }}>
         <nav aria-label="Main" className="container row" style={{ paddingTop: 16, paddingBottom: 16, alignItems: 'center', gap: '12px 28px' }}>
-          <img src={logoFull} alt="STH أثر Seafood Traceability Hub" style={{ height: 44, width: 'auto', marginRight: 'auto' }} />
+          <BrandLogo style={{ marginRight: 'auto' }} />
           <div className="row" style={{ gap: '6px 22px', fontSize: 15, fontWeight: 500 }}>
             <a href="#journey" style={navLink}>Journey</a>
             <a href="#screens" style={navLink}>Platform</a>
@@ -129,7 +129,7 @@ export default function Overview() {
             <div className="stack" style={{ background: c.slab, borderRadius: 16, padding: '20px 22px', gap: 12, border: `1px solid ${c.lineDark}` }}>
               <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
                 <span style={{ ...display, fontWeight: 600, fontSize: 15, letterSpacing: '0.04em' }}>LOT OM-DQM-26-11-0042</span>
-                <span className="pill pill--amber" style={{ padding: '4px 10px' }}>STH Verified</span>
+                <span className="pill pill--amber" style={{ padding: '4px 10px' }}>Trace Verified</span>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12, fontSize: 14 }}>
                 {LOT_FACTS.map(([k, v]) => (
@@ -248,7 +248,7 @@ export default function Overview() {
       <section className="container stack" style={{ paddingTop: 72, paddingBottom: 40, gap: 24 }}>
         <div className="stack" style={{ gap: 10, maxWidth: 800 }}>
           <div className="eyebrow">ELECTRONIC DOCUMENT FLOW</div>
-          <h2 className="h-section">STH prepares, transmits and delivers. MAFWR signs. Customs clears.</h2>
+          <h2 className="h-section">Trace prepares, transmits and delivers. MAFWR signs. Customs clears.</h2>
         </div>
         <div className="grid-auto" style={{ ['--min' as string]: '150px', gap: 10 }}>
           {FLOW.map((f, i) => {
@@ -264,7 +264,7 @@ export default function Overview() {
         </div>
         <div className="row" style={{ gap: 16, alignItems: 'center', justifyContent: 'space-between' }}>
           <div className="row muted" style={{ gap: 18, fontSize: 14 }}>
-            <Legend swatch={{ background: c.ocean }}>STH</Legend>
+            <Legend swatch={{ background: c.ocean }}>Trace</Legend>
             <Legend swatch={{ border: `2px dashed ${c.muted}` }}>Government decision</Legend>
             <Legend swatch={{ background: c.amber }}>Exporter</Legend>
           </div>
@@ -296,7 +296,7 @@ export default function Overview() {
       <section className="slab">
         <div className="container stack" style={{ paddingTop: 72, paddingBottom: 72, gap: 28 }}>
           <div className="stack" style={{ gap: 10, maxWidth: 780 }}>
-            <div className="eyebrow eyebrow--amber">WHERE STH WINS</div>
+            <div className="eyebrow eyebrow--amber">WHERE TRACE WINS</div>
             <h2 className="h-section" style={{ color: c.sand }}>The only record that runs from landing to the export document</h2>
           </div>
           <div className="grid-auto" style={{ ['--min' as string]: '260px', gap: 14 }}>
@@ -347,8 +347,8 @@ export default function Overview() {
 
       <footer style={{ borderTop: `1px solid ${c.line}` }}>
         <div className="container row muted" style={{ paddingTop: 24, paddingBottom: 24, gap: '12px 24px', justifyContent: 'space-between', alignItems: 'center', fontSize: 13 }}>
-          <img src={mark} alt="STH mark" style={{ height: 28, width: 'auto' }} />
-          <span style={{ flex: '1 1 400px' }}>Market and financial figures from the STH proposal (October 2026); financials are illustrative planning assumptions in the optimistic case. Lots, names and prices on operating screens are demo data.</span>
+          <img src={mark} alt="Trace mark" style={{ height: 28, width: 'auto' }} />
+          <span style={{ flex: '1 1 400px' }}>Market and financial figures from the Trace proposal (October 2026); financials are illustrative planning assumptions in the optimistic case. Lots, names and prices on operating screens are demo data.</span>
         </div>
       </footer>
     </div>

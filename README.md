@@ -2,7 +2,7 @@
 
 It is for Oman SeaFood Trace Solution.
 
-Investor prototype for the Seafood Traceability Hub (STH · أثر): the investor story, the field apps and the business platform, from first receipt to the buyer's audit.
+Investor prototype for the Seafood Traceability Hub (Trace · أثر): the investor story, the field apps and the business platform, from first receipt to the buyer's audit.
 
 React + TypeScript + Vite, with `react-router-dom` for navigation.
 
@@ -32,7 +32,7 @@ npm run lint
 
 ## Conventions
 
-- `src/index.css` holds the STH brand tokens as CSS variables plus the shared classes (`card`, `panel`, `slab`, `pill`, `btn`, `toggle`, `segmented`, `eyebrow`).
+- `src/index.css` holds the brand tokens as CSS variables plus the shared classes (`card`, `panel`, `slab`, `pill`, `btn`, `toggle`, `segmented`, `eyebrow`).
 - `src/tokens.ts` exposes the same colours for inline styles and SVG.
 - `src/components` has the shared pieces: `PlatformShell` (sidebar layout for desk screens), `PhoneFrame` (390 × 844 field-app frame) and `ui` (`Stat`, `BarRow`, icons).
 - `src/routes.ts` is the single list of paths; link with `paths.*`.
