@@ -315,7 +315,7 @@ export default function InvestorCase() {
             )
           })}
         </div>
-        <div className="muted" style={{ fontSize: 13 }}>Figures from the STH proposal (October 2026), optimistic case. Illustrative planning assumptions, to be validated in the pilot and the detailed financial model. Seed pricing is set on what the six months prove.</div>
+        <div className="muted" style={{ fontSize: 13 }}>Figures from the Trace/أثر proposal (October 2026), optimistic case. Illustrative planning assumptions, to be validated in the pilot and the detailed financial model. Seed pricing is set on what the six months prove.</div>
       </section>
     </div>
   )
