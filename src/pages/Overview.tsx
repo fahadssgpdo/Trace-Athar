@@ -98,6 +98,7 @@ export default function Overview() {
             <a href="#model" style={navLink}>Business model</a>
             <Link to={paths.storyboard} style={navLink}>Motion storyboard</Link>
           </div>
+          <Link to="/" className="btn btn--ghost" style={{ fontSize: 15, minHeight: 44 }}>Platform prototype</Link>
           <Link to={paths.investorCase} className="btn btn--amber" style={{ fontSize: 15, minHeight: 44 }}>Investor case</Link>
         </nav>
       </header>

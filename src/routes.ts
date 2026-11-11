@@ -1,17 +1,17 @@
 /** Single source of truth for screen paths, so links never drift from the router. */
 export const paths = {
-  overview: '/',
-  investorCase: '/investor-case',
-  storyboard: '/storyboard',
-  fisher: '/fisher',
-  lotRegistration: '/lots/new',
-  qualityCheck: '/quality',
-  passport: '/passport',
-  marketplace: '/marketplace',
-  plant: '/plant',
-  exportDocs: '/export',
-  intelligence: '/intelligence',
-  buyerAudit: '/buyer-audit',
+  overview: '/investor',
+  investorCase: '/investor/case',
+  storyboard: '/investor/storyboard',
+  fisher: '/investor/fisher',
+  lotRegistration: '/investor/lot-registration',
+  qualityCheck: '/investor/quality',
+  passport: '/investor/passport',
+  marketplace: '/investor/marketplace',
+  plant: '/investor/plant',
+  exportDocs: '/investor/export',
+  intelligence: '/investor/intelligence',
+  buyerAudit: '/investor/buyer-audit',
 } as const
 
 export const titles: Record<string, string> = {
