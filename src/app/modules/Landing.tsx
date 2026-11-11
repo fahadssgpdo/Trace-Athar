@@ -2,10 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { c, display } from '../../tokens'
 import { mod } from '../nav'
-import {
-  boatOf, CLOSED_AREA, coastX, fmtTime, GEARS, inPermittedArea, kgFmt, licenceValid, REF_PRICE, ro, SPECIES,
-  type LotStatus,
-} from '../store'
+import { boatOf, fmtTime, GEARS, inPermittedArea, kgFmt, licenceValid, REF_PRICE, ro, SPECIES, type LotStatus } from '../store'
 import { useStore } from '../StoreContext'
 import { Badge, Empty, Field, LotLink, Notice, Page, Panel, QrCode, StatusBadge } from '../ui'
 
@@ -382,84 +379,6 @@ export function FisherAppModule() {
           </nav>
         </div>
       </div>
-    </Page>
-  )
-}
-
-/* ------------------------------------------------------------------ M5 */
-export function Tracking() {
-  const { state, run } = useStore()
-  const outside = state.boats.filter((b) => !inPermittedArea(b))
-  const alerts = state.events.filter((e) => e.type === 'ObjectEvent · geofence').slice(-6).reverse()
-  const SITES_XY: [string, number, number][] = [['Sur', coastX(40) - 4, 40], ['Masirah', 318, 190], ['Duqm', coastX(290) - 2, 290]]
-
-  return (
-    <Page
-      code="M5"
-      title="Position and gear tracking"
-      lead="Phone GPS for artisanal boats, low-cost trackers for untracked ones, and the optional yes/no permitted-area check from MAFWR vessel monitoring. Geofences flag a boat that enters a closed area."
-      actions={<button type="button" className="btn btn--ocean" onClick={() => run('moveBoats')}>Advance one hour</button>}
-    >
-      {outside.length > 0 && <Notice tone="warn">{outside.map((b) => b.name).join(', ')} {outside.length > 1 ? 'are' : 'is'} inside the closed area. Lots landed from {outside.length > 1 ? 'these boats' : 'this boat'} will carry a failed permitted-area check.</Notice>}
-      <div className="row" style={{ gap: 20, alignItems: 'flex-start' }}>
-        <Panel title="Live positions" aside={<span className="muted" style={{ fontSize: 13 }}>Schematic map · {fmtTime(state.clock)}</span>} style={{ flex: '999 1 520px' }}>
-          <svg viewBox="0 0 560 360" role="img" aria-label={`Map of ${state.boats.length} boats; ${outside.length} inside the closed area`} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 14, background: '#DCE8F2', fontFamily: 'var(--font-text)' }}>
-            <path d={`M0 0 H${coastX(0)} L${coastX(360)} 360 H0 Z`} fill="#EDE5D3" />
-            <ellipse cx="318" cy="190" rx="9" ry="24" fill="#EDE5D3" />
-            <rect x={CLOSED_AREA.x} y={CLOSED_AREA.y} width={CLOSED_AREA.w} height={CLOSED_AREA.h} fill="rgba(227,163,59,0.18)" stroke={c.accent} strokeDasharray="6 4" strokeWidth="1.5" rx="6" />
-            <text x={CLOSED_AREA.x + 6} y={CLOSED_AREA.y + 16} fontSize="11" fill={c.accent} fontWeight="600">Closed area · lobster season</text>
-            {SITES_XY.map(([n, x, y]) => (
-              <g key={n}>
-                <rect x={x - 4} y={y - 4} width="8" height="8" fill={c.ocean} />
-                <text x={x - 10} y={y + 4} fontSize="12" fill={c.ocean} textAnchor="end" fontWeight="600">{n}</text>
-              </g>
-            ))}
-            {state.boats.map((b) => {
-              const ok = inPermittedArea(b)
-              return (
-                <g key={b.id}>
-                  <circle cx={b.x} cy={b.y} r="7" fill={ok ? c.harbour : c.amber} stroke={c.ocean} strokeWidth="2" />
-                  <text x={b.x + 11} y={b.y + 4} fontSize="11" fill={c.ocean}>{b.name}</text>
-                </g>
-              )
-            })}
-          </svg>
-          <div className="row muted" style={{ gap: 16, fontSize: 13 }}>
-            <span style={{ display: 'inline-flex', gap: 6, alignItems: 'center' }}><span className="swatch" style={{ background: c.harbour, borderRadius: 999 }} />In permitted area</span>
-            <span style={{ display: 'inline-flex', gap: 6, alignItems: 'center' }}><span className="swatch" style={{ background: c.amber, borderRadius: 999 }} />Inside a geofence</span>
-          </div>
-        </Panel>
-        <Panel title="Geofence alerts" style={{ flex: '1 1 300px' }}>
-          {alerts.length ? alerts.map((e, i) => (
-            <div key={i} style={{ fontSize: 14, borderBottom: `1px solid ${c.line}`, paddingBottom: 8 }}>
-              <div style={{ fontWeight: 600 }}>{e.text}</div>
-              <div className="muted" style={{ fontSize: 12 }}>{fmtTime(e.t)} · {e.actor}</div>
-            </div>
-          )) : <Empty>No alerts. Advance the clock to move the fleet.</Empty>}
-        </Panel>
-      </div>
-      <Panel title="Vessels and gear records">
-        <div className="table-scroll">
-          <table className="table">
-            <thead><tr><th scope="col">Vessel</th><th scope="col">Type</th><th scope="col">Tracker</th><th scope="col">Gear on record</th><th scope="col">Permitted area</th><th scope="col">Last lot</th></tr></thead>
-            <tbody>
-              {state.boats.map((b) => {
-                const last = state.lots.filter((l) => l.boatId === b.id).slice(-1)[0]
-                return (
-                  <tr key={b.id}>
-                    <td style={{ fontWeight: 600 }}>{b.name}<div className="muted" style={{ fontSize: 12, fontWeight: 400 }}>{b.id}</div></td>
-                    <td>{b.type}</td>
-                    <td>{b.tracker}</td>
-                    <td>{b.gear}</td>
-                    <td>{inPermittedArea(b) ? <Badge tone="ok">Yes</Badge> : <Badge tone="warn">No</Badge>}</td>
-                    <td>{last ? <LotLink id={last.id} /> : '—'}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
-      </Panel>
     </Page>
   )
 }

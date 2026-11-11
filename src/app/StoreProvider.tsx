@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { StoreContext, type Store } from './StoreContext'
 import { actions, seed, type State } from './store'
 
-const KEY = 'trace-athar-prototype-v1'
+const KEY = 'trace-athar-prototype-v2'
 
 function load(): State {
   try {

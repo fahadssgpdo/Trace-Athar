@@ -22,7 +22,7 @@ The app opens on a working prototype of every module in the proposal (Appendix A
 | P1 | M1 Lot registration at first receipt | `/lot-registration` |
 | P1 | M3 e-Logbook (offline queue, pre-landing declaration) | `/e-logbook` |
 | P1 | M4 Fisher app (Arabic/English, voice log, payments) | `/fisher-app` |
-| P1 | M5 Position and gear tracking (geofence) | `/tracking` |
+| P1 | M5 Position and gear tracking (chart, geofences, tagged gear; Arabic/English) | `/tracking` |
 | P2 | M2 Quality check and evidence | `/quality-check` |
 | P2 | M8 Premium grading and Trace Verified mark | `/grading` |
 | P3 | M6 Digital first-sale marketplace | `/marketplace` |
@@ -40,6 +40,13 @@ The app opens on a working prototype of every module in the proposal (Appendix A
 Shared core: dashboard `/`, lot record `/lots/:id`, registries `/registries`, event log `/events` (EPCIS JSON and CSV export).
 
 MAFWR, Bayan, the partner bank, scales, trackers and sensors are simulated in the browser; there is no backend.
+
+M5 runs on real WGS 84 positions on Oman's Al Wusta and Ash Sharqiyah coast: `store.ts` holds a simplified
+coastline, Masirah Island, the landing sites and two illustrative closed areas (they are not a copy of any
+current ministerial decision). Vessels carry a course, a speed and a track; `moveBoats` runs the fleet
+forward an hour, keeps boats off the land, raises a geofence alert on entering a closed area and a
+position-gap alert once a phone-tracked boat is beyond mobile coverage. The screen reads in Arabic or
+English — set `dir` and `lang` on `Page` to do the same elsewhere.
 
 ## Investor presentation
 

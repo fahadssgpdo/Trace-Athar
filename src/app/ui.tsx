@@ -5,9 +5,13 @@ import { CORE, mod } from './nav'
 import { STATUS, type Tone } from './format'
 import type { LotStatus } from './store'
 
-export function Page({ code, title, lead, actions, children }: { code?: string; title: string; lead?: ReactNode; actions?: ReactNode; children: ReactNode }) {
+export function Page({ code, title, lead, actions, children, dir, lang }: {
+  code?: string; title: string; lead?: ReactNode; actions?: ReactNode; children: ReactNode
+  /** Set both to render a module in another reading direction, e.g. Arabic. */
+  dir?: 'ltr' | 'rtl'; lang?: string
+}) {
   const m = code ? mod(code) : undefined
-  return (
+  const body = (
     <>
       <div className="row" style={{ gap: 16, alignItems: 'flex-end', justifyContent: 'space-between' }}>
         <div className="stack" style={{ gap: 6, minWidth: 0 }}>
@@ -19,6 +23,12 @@ export function Page({ code, title, lead, actions, children }: { code?: string; 
       </div>
       {children}
     </>
+  )
+  if (!dir && !lang) return body
+  return (
+    <div className="stack" dir={dir} lang={lang} style={{ gap: 22, minWidth: 0, fontFamily: lang === 'ar' ? 'var(--font-arabic)' : undefined }}>
+      {body}
+    </div>
   )
 }
 
