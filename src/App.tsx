@@ -26,7 +26,7 @@ function RouteEffects() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
       <RouteEffects />
       <Routes>
         <Route path={paths.overview} element={<Overview />} />
