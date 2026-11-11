@@ -348,7 +348,7 @@ export default function Overview() {
       <footer style={{ borderTop: `1px solid ${c.line}` }}>
         <div className="container row muted" style={{ paddingTop: 24, paddingBottom: 24, gap: '12px 24px', justifyContent: 'space-between', alignItems: 'center', fontSize: 13 }}>
           <img src={mark} alt="Trace mark" style={{ height: 28, width: 'auto' }} />
-          <span style={{ flex: '1 1 400px' }}>Market and financial figures from the Trace proposal (October 2026); financials are illustrative planning assumptions in the optimistic case. Lots, names and prices on operating screens are demo data.</span>
+          <span style={{ flex: '1 1 400px' }}>Market and financial figures from the STH proposal (October 2026); financials are illustrative planning assumptions in the optimistic case. Lots, names and prices on operating screens are demo data.</span>
         </div>
       </footer>
     </div>
